@@ -53,3 +53,37 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
+class Reports(db.Model):
+    __tablename__ = 'cw_reports'
+    rid = db.Column(db.Integer, db.Sequence('cw_report_id_seq'), primary_key=True)
+    r_email = db.Column(db.String(150), unique=True, nullable=False)
+    r_phone = db.Column(db.Integer, unique=False, nullable=False)
+    r_category = db.Column(db.String(50))
+    r_title = db.Column(db.String(100))
+    r_body = db.Column(db.String(500))
+    user_id = db.Column(db.Integer, db.ForeignKey('cw_user.id'))
+
+
+class Cinemas(db.Model):
+    __tablename__ = 'cw_cinemas'
+    cid = db.Column(db.Integer, primary_key=True)
+    c_name = db.Column(db.String(50), unique=True)
+    c_district = db.Column(db.String(50), unique=False)
+    c_address = db.Column(db.String(250), unique=True)
+    fid = db.Column(db.Integer, db.ForeignKey('cw_facility.fid'))
+
+    def __repr__(self):
+        return '<Cinemas {}>'.format(self.c_name)
+
+
+class Facility(db.Model):
+    __tablename__ = 'cw_facility'
+    fid = db.Column(db.Integer, primary_key=True)
+    total_house = db.Column(db.Integer, nullable=False)
+    total_seat = db.Column(db.Integer, nullable=False)
+    cid = db.Column(db.Integer, db.ForeignKey('cw_cinemas.cid'))
+
+    def __repr__(self):
+        return '<Cinemas {}>'.format(self.total_house)

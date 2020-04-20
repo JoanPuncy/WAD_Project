@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField
-from wtforms.validators import ValidationError, DataRequired, Email
+from wtforms import StringField, SubmitField, IntegerField, SelectField, TextAreaField, SelectMultipleField
+from wtforms.validators import ValidationError, DataRequired, Email, Length
 from flask_babel import _, lazy_gettext as _l
 from app.models import User
 
@@ -33,3 +33,26 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(u_email=self.u_email.data).first()
             if u_email is not None:
                 raise ValidationError(_('Please use a different email address.'))
+
+
+class ReportForm(FlaskForm):
+    r_email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    r_phone = IntegerField(_l('Phone Number (+852)'), validators=[DataRequired()])
+    r_category = SelectField(_l('Category'), choices=[(_l('Ticket')), (_l('Staff')),
+                                                      (_l('Facility')), (_l('Website')), (_l('Other'))])
+    r_title = StringField(_l('Title'), validators=[DataRequired()])
+    r_body = TextAreaField(_l('Content'), validators=[Length(min=0, max=500)])
+    submit = SubmitField(_l('Submit'))
+
+
+    def validate_email(self, r_email):
+        if r_email.data != self.original_u_email:
+            user = User.query.filter_by(r_email=self.u_email.data).first()
+            if r_email is not None:
+                raise ValidationError(_('Please use your account email address.'))
+
+    def validate_phone(self, r_phone):
+        if r_phone.data != self.original_u_phone:
+            user = User.query.filter_by(r_phone=self.u_phone.data).first()
+            if r_phone is not None:
+                raise ValidationError(_('Please use your account phone number.'))

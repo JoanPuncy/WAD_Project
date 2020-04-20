@@ -3,8 +3,8 @@ from flask import render_template, flash, redirect, url_for, request, g
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from app import current_app, db
-from app.main.forms import EditProfileForm
-from app.models import User
+from app.main.forms import EditProfileForm, ReportForm
+from app.models import User, Cinemas, Reports, Facility
 from app.main import bp
 
 
@@ -52,5 +52,26 @@ def edit_profile():
         form.u_email.data = current_user.u_email
         form.u_phone.data = current_user.u_phone
         form.u_person.data = current_user.u_person
-    return render_template('edit_profile.html', title=_('Edit Profile'),
-                           form=form)
+    return render_template('edit_profile.html', title=_('Edit Profile'), form=form)
+
+
+@bp.route('/report', methods=['GET', 'POST'])
+@login_required
+def report():
+    form = ReportForm(current_user.username)
+    form.r_category.choices = [reports.r_category for reports in Reports.query.filter_by(r_category='Ticket').all()]
+    if form.validate_on_submit():
+        reports = Reports(r_email=form.r_email.data, r_phone=form.r_phone.data,
+                          r_category=form.r_category.data, r_title=form.r_title.data, r_body=form.r_body.data,
+                          author=current_user)
+        db.session.add(reports)
+        db.session.commit()
+        flash(_('Your enquiry have been submit.'))
+        return redirect(url_for('main.user'))
+    return render_template('report.html', title=_('Enquiry/Report'), form=form)
+
+
+@bp.route('/cinemas', methods=['GET', 'POST'])
+def cinemas():
+
+    return render_template('cinemas.html', title=_('Cinemas'))
