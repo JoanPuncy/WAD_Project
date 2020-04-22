@@ -87,3 +87,10 @@ class Facility(db.Model):
 
     def __repr__(self):
         return '<Cinemas {}>'.format(self.total_house)
+
+
+class M_Category(db.Model):
+    __tablename__ = 'cw_m_category'
+    mcid = db.Column(db.Integer, primary_key=True)
+    mc_level = db.Column(db.String(3), unique=True)
+    mc_definition = db.Column(db.String(50))

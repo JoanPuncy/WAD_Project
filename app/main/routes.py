@@ -71,6 +71,12 @@ def report():
     return render_template('report.html', title=_('Enquiry/Report'), form=form)
 
 
+@bp.route('/movie_category', methods=['GET', 'POST'])
+def movie_category():
+
+    return render_template('movie_category.html', title=_('Movie Category'))
+
+
 @bp.route('/cinemas', methods=['GET', 'POST'])
 def cinemas():
 

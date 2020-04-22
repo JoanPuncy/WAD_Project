@@ -2,9 +2,11 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block current_app_content %}
-    <h1>{{ _('Sign In') }}</h1>
+    <img class="mb-4" src="https://www.cinema.com.hk/images/icon_broadwayLogo_wap_v3.png"
+         alt="Broadway Circuit Logo" width="300" height="100">
+    <h1 class="h1 mb-3 font-weight-normal">{{ _('Sign In') }}</h1>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ wtf.quick_form(form) }}
         </div>
     </div>

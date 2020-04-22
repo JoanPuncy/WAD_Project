@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block current_app_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <div class="card">
+                    <div class="bg-warning" align="center"><h1>{{ _('Moive Category') }}</h1></div>
+                    <div class="card-block">
+                        <table>
+                            <tr class="table table-hover">
+                            <tr>
+                                <td height="50px" width="150px" align="center">
+                                    <h3>{{ _('Level') }}</h3>
+                                </td>
+                                <td height="50px" width="200px" align="center">
+                                    <h3>{{ _('Symbol') }}</h3>
+                                </td>
+                                <td height="50px" width="400px" align="center">
+                                    <h3>{{ _('Definition') }}</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="50px" width="150px" align="center">
+                                    <h4>I</h4>
+                                </td>
+                                <td height="50px" width="200px" align="center">
+                                    <img src="https://vignette.wikia.nocookie.net/rating-system/images/c/c8/HK1.svg/revision/latest/scale-to-width-down/35?cb=20161013200546"
+                                         alt="I Logo" />
+                                </td>
+                                <td height="50px" width="400px">
+                                    <h4>{{ _('Suitable for All Ages') }}</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="50px" width="150px" align="center">
+                                    <h4>IIA</h4>
+                                </td>
+                                <td height="50px" width="200px" align="center">
+                                    <img src="https://vignette.wikia.nocookie.net/rating-system/images/7/7c/HK2a.svg/revision/latest/scale-to-width-down/35?cb=20161013200656"
+                                         alt="IIA Logo">
+                                </td>
+                                <td height="50px" width="400px">
+                                    <h4>{{ _('Not Suitable for Children') }}</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="50px" width="150px" align="center">
+                                    <h4>IIB</h4>
+                                </td>
+                                <td height="50px" width="200px" align="center">
+                                    <img src="https://vignette.wikia.nocookie.net/rating-system/images/6/64/HK2b.svg/revision/latest/scale-to-width-down/35?cb=20161013200726"
+                                         alt="IIB Logo">
+                                </td>
+                                <td height="50px" width="400px">
+                                    <h4>{{ _('Not Suitable for Young Persons and Children') }}</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="50px" width="150px" align="center">
+                                    <h4>III</h4>
+                                </td>
+                                <td height="50px" width="200px" align="center">
+                                    <img src="https://vignette.wikia.nocookie.net/rating-system/images/8/85/HK3.svg/revision/latest/scale-to-width-down/35?cb=20161013200801"
+                                         alt="III Logo">
+                                </td>
+                                <td height="50px" width="400px">
+                                    <h4>{{ _('Persons Aged 18 and Above Only') }}</h4>
+                                </td>
+                            </tr>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
