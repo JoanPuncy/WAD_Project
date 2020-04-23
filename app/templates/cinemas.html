@@ -2,7 +2,32 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block current_app_content %}
-<nav aria-label="...">
+    <nav class="navbar navbar-default alert-info">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-cinemas" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#District">{{ _('District') }}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-cinemas">
+                <ul class="nav navbar-nav">
+                    <li><a href="#HKI">{{ _('Hong Kong Island') }}</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#KLN">{{ _('Kowloon') }}</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#NT">{{ _('New Territories') }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">

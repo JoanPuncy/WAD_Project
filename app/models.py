@@ -7,6 +7,21 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from app import db, login
 
+'''
+c_followers = db.Table(
+    'cw_cfollow', db.Column('c_fol_id', db.Integer, primary_key=True),
+    db.Column('c_foled_id', db.Integer, db.ForeignKey('cw_cinemas.cid'))
+)
+'''
+
+
+'''
+m_followers = db.Table(
+    'cw_mfollow', db.Column('m_fol_id', db.Integer, primary_key=True),
+    db.Column('m_foled_id', db.Integer, db.ForeignKey('cw_movie.cid'))
+)
+'''
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'cw_user'
