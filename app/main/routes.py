@@ -3,8 +3,8 @@ from flask import render_template, flash, redirect, url_for, request, g
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from app import current_app, db
-from app.main.forms import EditProfileForm, PostForm
-from app.models import User, Post
+from app.main.forms import EditProfileForm, ReportForm, TicketForm
+from app.models import User, Cinemas, Reports, Facility, Ticket, Price, Movie, M_Category
 from app.main import bp
 
 
@@ -18,55 +18,15 @@ def before_request():
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
-@login_required
 def index():
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash(_('Your post is now live!'))
-        return redirect(url_for('main.index'))
-    page = request.args.get('page', 1, type=int)
-    posts = current_user.followed_posts().paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.index', page=posts.next_num) \
-        if posts.has_next else None
-    prev_url = url_for('main.index', page=posts.prev_num) \
-        if posts.has_prev else None
-    return render_template('index.html', title=_('Home'), form=form,
-                           posts=posts.items, next_url=next_url,
-                           prev_url=prev_url)
-
-
-@bp.route('/explore')
-@login_required
-def explore():
-    page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.explore', page=posts.next_num) \
-        if posts.has_next else None
-    prev_url = url_for('main.explore', page=posts.prev_num) \
-        if posts.has_prev else None
-    return render_template('index.html', title=_('Explore'),
-                           posts=posts.items, next_url=next_url,
-                           prev_url=prev_url)
+    return render_template('index.html', title=_('Home'))
 
 
 @bp.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    page = request.args.get('page', 1, type=int)
-    posts = user.posts.order_by(Post.timestamp.desc()).paginate(
-        page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.user', username=user.username, page=posts.next_num) \
-        if posts.has_next else None
-    prev_url = url_for('main.user', username=user.username, page=posts.prev_num) \
-        if posts.has_prev else None
-    return render_template('user.html', user=user, posts=posts.items,
-                           next_url=next_url, prev_url=prev_url)
+    return render_template('user.html', user=user)
 
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
@@ -74,45 +34,78 @@ def user(username):
 def edit_profile():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
         current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
+        current_user.u_email = form.u_email.data
+        current_user.u_phone = form.u_phone.data
+        current_user.u_person = form.u_person.data
         db.session.commit()
         flash(_('Your changes have been saved.'))
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
         form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title=_('Edit Profile'),
-                           form=form)
+        form.u_email.data = current_user.u_email
+        form.u_phone.data = current_user.u_phone
+        form.u_person.data = current_user.u_person
+    return render_template('edit_profile.html', title=_('Edit Profile'), form=form)
 
 
-@bp.route('/follow/<username>')
+@bp.route('/report', methods=['GET', 'POST'])
 @login_required
-def follow(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        flash(_('User %(username)s not found.', username=username))
-        return redirect(url_for('main.index'))
-    if user == current_user:
-        flash(_('You cannot follow yourself!'))
-        return redirect(url_for('main.user', username=username))
-    current_user.follow(user)
-    db.session.commit()
-    flash(_('You are following %(username)s!', username=username))
-    return redirect(url_for('main.user', username=username))
+def report():
+    form = ReportForm(current_user.username)
+    if form.validate_on_submit():
+        reports = Reports(r_email=form.r_email.data, r_phone=form.r_phone.data,
+                          r_category=form.r_category.data, r_title=form.r_title.data, r_body=form.r_body.data,
+                          author=current_user)
+        db.session.add(reports)
+        db.session.commit()
+        flash(_('Your enquiry have been submit.'))
+        return redirect(url_for('main.user'))
+    return render_template('report.html', title=_('Enquiry/Report'), form=form)
 
 
-@bp.route('/unfollow/<username>')
+@bp.route('/ticket', methods=['GET', 'POST'])
 @login_required
-def unfollow(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        flash(_('User %(username)s not found.', username=username))
-        return redirect(url_for('main.index'))
-    if user == current_user:
-        flash(_('You cannot unfollow yourself!'))
-        return redirect(url_for('main.user', username=username))
-    current_user.unfollow(user)
-    db.session.commit()
-    flash(_('You are not following %(username)s.', username=username))
-    return redirect(url_for('main.user', username=username))
+def ticket():
+    form = TicketForm(current_user.username)
+    if form.validate_on_submit():
+        tickets = Ticket(c_num=form.c_num.data, m_num=form.m_num.data, p_person=form.p_person.data,
+                         p_role=form.p_role.data, t_date=form.t_date.data, p_price=form.p_price.data,
+                         t_payment=form.t_payment.data)
+        db.session.add(tickets)
+        db.session.commit()
+        flash(_('Submit Success!'))
+        return redirect(url_for('main.user'))
+    return render_template('ticket.html', title=_('Ticket'), form=form)
+
+
+def price():
+    form = TicketForm(current_user.username)
+    if form.validate_on_submit():
+        prices = Price(p_role=form.u_person.data, p_person=form.p_person.data, p_date=form.t_date.data,
+                       p_price=form.p_price.data)
+        db.session.add(prices)
+        db.session.commit()
+        return redirect(url_for('main.user'))
+    elif request.method == 'GET':
+        form.p_role.data = current_user.u_person
+    return render_template('ticket.html', title=_('Ticket'), form=form)
+
+
+@bp.route('/movie_category', methods=['GET', 'POST'])
+def movie_category():
+    return render_template('movie_category.html', title=_('Movie Category'))
+
+
+@bp.route('/cinemas', methods=['GET', 'POST'])
+def cinemas():
+    return render_template('cinemas.html', title=_('Cinemas'))
+
+
+@bp.route('/movie', methods=['GET', 'POST'])
+def movie():
+    return render_template('movie.html', title=_('Movie'))
