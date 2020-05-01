@@ -81,9 +81,23 @@ class Reports(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('cw_user.id'))
 
 
+class Ticket(db.Model):
+    __tablename__ = 'cw_ticket'
+    tid = db.Column(db.Integer, db.Sequence('cw_ticket_id_seq'), primary_key=True)
+    c_num = db.Column(db.Integer, nullable=False)
+    m_num = db.Column(db.Integer, nullable=False)
+    p_person = db.Column(db.Integer)
+    p_role = db.Column(db.String)
+    t_date = db.Column(db.DateTime)
+    p_price = db.Column(db.Integer)
+    t_payment = db.Column(db.String, nullable=False)
+    generate_time = db.Column(db.DateTime,  default=datetime.utcnow, nullable=True)
+
+
 class Cinemas(db.Model):
     __tablename__ = 'cw_cinemas'
     cid = db.Column(db.Integer, primary_key=True)
+    c_num = db.Column(db.Integer, nullable=False)
     c_name = db.Column(db.String(50), unique=True)
     c_district = db.Column(db.String(50), unique=False)
     c_address = db.Column(db.String(250), unique=True)
@@ -104,8 +118,35 @@ class Facility(db.Model):
         return '<Cinemas {}>'.format(self.total_house)
 
 
+class Movie(db.Model):
+    __tablename__ = 'cw_movie'
+    mid = db.Column(db.Integer, primary_key=True)
+    m_num = db.Column(db.Integer, nullable=False)
+    m_name = db.Column(db.String(100), unique=True)
+    m_unreleased = db.Column(db.Boolean, default=False, nullable=False)
+    m_latest = db.Column(db.Boolean, default=False, nullable=False)
+    m_type = db.Column(db.String(50))
+    m_category = db.Column(db.String(3), nullable=False)
+    m_rate = db.Column(db.Numeric(2, 2))
+    m_releasedate = db.Column(db.DateTime)
+    tid = db.Column(db.Integer, db.ForeignKey('cw_ticket'))
+
+    def __repr__(self):
+        return '<Movie {}>'.format(self.m_name)
+
+
 class M_Category(db.Model):
     __tablename__ = 'cw_m_category'
     mcid = db.Column(db.Integer, primary_key=True)
     mc_level = db.Column(db.String(3), unique=True)
     mc_definition = db.Column(db.String(50))
+
+
+class Price(db.Model):
+    __tablename__ = 'cw_price'
+    pid = db.Column(db.Integer, primary_key=True)
+    p_role = db.Column(db.String)
+    p_person = db.Column(db.Integer)
+    p_time = db.Column(db.DateTime)
+    p_price = db.Column(db.Integer)
+    tid = db.Column(db.Integer, db.ForeignKey('cw_ticket'))

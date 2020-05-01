@@ -3,8 +3,8 @@ from flask import render_template, flash, redirect, url_for, request, g
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from app import current_app, db
-from app.main.forms import EditProfileForm, ReportForm
-from app.models import User, Cinemas, Reports, Facility
+from app.main.forms import EditProfileForm, ReportForm, TicketForm
+from app.models import User, Cinemas, Reports, Facility, Ticket, Price, Movie, M_Category
 from app.main import bp
 
 
@@ -18,9 +18,7 @@ def before_request():
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
-@login_required
 def index():
-
     return render_template('index.html', title=_('Home'))
 
 
@@ -59,7 +57,6 @@ def edit_profile():
 @login_required
 def report():
     form = ReportForm(current_user.username)
-    form.r_category.choices = [reports.r_category for reports in Reports.query.filter_by(r_category='Ticket').all()]
     if form.validate_on_submit():
         reports = Reports(r_email=form.r_email.data, r_phone=form.r_phone.data,
                           r_category=form.r_category.data, r_title=form.r_title.data, r_body=form.r_body.data,
@@ -71,13 +68,39 @@ def report():
     return render_template('report.html', title=_('Enquiry/Report'), form=form)
 
 
+@bp.route('/ticket', methods=['GET', 'POST'])
+@login_required
+def ticket():
+    form = TicketForm(current_user.username)
+    if form.validate_on_submit():
+        tickets = Ticket(c_num=form.c_num.data, m_num=form.m_num.data, p_person=form.p_person.data,
+                         p_role=form.p_role.data, t_date=form.t_date.data, p_price=form.p_price.data,
+                         t_payment=form.t_payment.data)
+        db.session.add(tickets)
+        db.session.commit()
+        flash(_('Submit Success!'))
+        return redirect(url_for('main.user'))
+    return render_template('ticket.html', title=_('Ticket'), form=form)
+
+
+def price():
+    form = TicketForm(current_user.username)
+    if form.validate_on_submit():
+        prices = Price(p_role=form.u_person.data, p_person=form.p_person.data, t_date=form.t_date.data,
+                       p_price=form.p_price.data)
+        db.session.add(prices)
+        db.session.commit()
+        return redirect(url_for('main.user'))
+    elif request.method == 'GET':
+        form.p_role.data = current_user.u_person
+    return render_template('ticket.html', title=_('Ticket'), form=form)
+
+
 @bp.route('/movie_category', methods=['GET', 'POST'])
 def movie_category():
-
     return render_template('movie_category.html', title=_('Movie Category'))
 
 
 @bp.route('/cinemas', methods=['GET', 'POST'])
 def cinemas():
-
     return render_template('cinemas.html', title=_('Cinemas'))
