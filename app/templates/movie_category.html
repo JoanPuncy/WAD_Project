@@ -1,12 +1,12 @@
-{% extends "base.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
-
 {% block current_app_content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="card">
-                    <div class="bg-warning text-center text-danger"><h1>{{ _('Moive Category') }}</h1></div>
+                    <div class="bg-warning text-center text-danger">
+                        <a name="MC"></a>
+                        <h1>{{ _('Moive Category') }}</h1>
+                    </div>
                     <div class="card-block">
                         <table>
                             <tr class="table table-hover">
@@ -27,7 +27,7 @@
                                 </td>
                                 <td height="50px" width="200px" align="center">
                                     <img src="https://vignette.wikia.nocookie.net/rating-system/images/c/c8/HK1.svg/revision/latest/scale-to-width-down/35?cb=20161013200546"
-                                         alt="I Logo" />
+                                         alt="I Logo"/>
                                 </td>
                                 <td height="50px" width="400px">
                                     <h4>{{ _('Suitable for All Ages') }}</h4>
@@ -69,6 +69,10 @@
                                     <h4>{{ _('Persons Aged 18 and Above Only') }}</h4>
                                 </td>
                             </tr>
+                            <tr>
+                                <td></td><td>
+                                <td align="right" valign="bottom">
+                                    <a href="#Top" class="href-hover">^Top</a></td>
                             </tr>
                         </table>
                     </div>

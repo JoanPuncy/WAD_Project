@@ -1,0 +1,159 @@
+<html>
+<head>
+    <script>
+        function print_result() {
+            var msg = {{_('No. of People = ')}};
+            msg += document.Ticket_Form.countno.value + '\n';
+
+            if (document.Ticket_Form.role[0].checked) {
+                msg += {{ _('Social Role = ') }} +document.Ticket_Form.role[0].id + '\n';
+                msg += '$ ' + document.Ticket_Form.role[0].value + '@1' +'\n';
+            }
+            else if (document.Ticket_Form.role[1].checked) {
+                msg += {{ _('Social Role = ') }} +document.Ticket_Form.role[1].id + '\n';
+                msg += '$ ' + document.Ticket_Form.role[1].value + '@1' +'\n';
+            }
+            else {
+                msg += {{ _('Social Role = ') }} +document.Ticket_Form.role[2].id + '\n';
+                msg += '$ ' + document.Ticket_Form.role[1].value + '@1' +'\n';
+            }
+
+            if (document.Ticket_Form.C1.checked) {
+                msg += {{ _('Cinemas = ') }} +document.Ticket_Form.C1.value + '\n';
+            }
+            else if (document.Ticket_Form.C2.checked) {
+                msg += {{ _('Cinemas = ') }} +document.Ticket_Form.C2.value + '\n';
+            }
+            else if (document.Ticket_Form.C3.checked) {
+                msg += {{ _('Cinemas = ') }} +document.Ticket_Form.C3.value + '\n';
+            }
+            else if (document.Ticket_Form.C4.checked) {
+                msg += {{ _('Cinemas = ') }} +document.Ticket_Form.C4.value + '\n';
+            }
+            else if (document.Ticket_Form.C5.checked) {
+                msg += {{ _('Cinemas = ') }} +document.Ticket_Form.C5.value + '\n';
+            }
+            else if (document.Ticket_Form.C6.checked) {
+                msg += {{ _('Cinemas = ') }} +document.Ticket_Form.C6.value + '\n';
+            }
+
+            if (document.Ticket_Form.M1.checked) {
+                msg += {{ _('Movie = ') }} +document.Ticket_Form.M1.value + '\n';
+            }
+            else if (document.Ticket_Form.M2.checked) {
+                msg += {{ _('Movie = ') }} +document.Ticket_Form.M2.value + '\n';
+            }
+            else if (document.Ticket_Form.M3.checked) {
+                msg += {{ _('Movie = ') }} +document.Ticket_Form.M3.value + '\n';
+            }
+            else if (document.Ticket_Form.M4.checked) {
+                msg += {{ _('Movie = ') }} +document.Ticket_Form.M4.value + '\n';
+            }
+            else if (document.Ticket_Form.M5.checked) {
+                msg += {{ _('Movie = ') }} +document.Ticket_Form.M5.value + '\n';
+            }
+
+            msg += {{ _('Appointment Date = ') }} +document.Ticket_Form.adate.value + '\n';
+
+            if (document.Ticket_Form.payment[0].checked) {
+                msg += {{ _('Payment = ') }} +document.Ticket_Form.payment[0].value + '\n';
+            } else {
+                msg += {{ _('Payment = ') }} +document.Ticket_Form.payment[1].value + '\n';
+            }
+         msg += '\n';
+	    alert(msg);
+        }
+    </script>
+    <script>
+        function reform() {
+            document.getElementById("TI").reset();
+        }
+    </script>
+</head>
+<body>
+<div class="col-sm-12 col-md-6">
+    <div class="card">
+        <div class="bg-info"><h2 class="text-center text-danger">{{ _('VM Ticket From') }}</h2></div>
+        <div class="card-block">
+            <div id="form">
+                <form name="Ticket_Form" onSubmit="print_result();" method="post"
+                      enctype="multipart/form-data">
+                    <!-- Ticket Information -->
+                    <fieldset onreset="reform();">
+                        <legend>Ticket Infomation</legend>
+                        <table class="h5 text-left" width="500px">
+                            <tr>
+                                <td class="h4">{{ _('Cinemas:') }}</td>
+                                <td><input name="C1" type="radio" value="MOViE MOViE Pacific Place"/>
+                                    MOViE MOViE Pacific Place<p/>
+                                    <input name="C2" type="radio" value="MOViE MOViE Cityplaza"/>
+                                    MOViE MOViE Cityplaza<p/>
+                                    <input name="C3" type="radio" value="HOLLYWOOD"/>
+                                    {{ _('HOLLYWOOD') }}<p/>
+                                    <input name="C4" type="radio" value="PREMIERE ELEMENTS"/>
+                                    PREMIERE ELEMENTS<p/>
+                                    <input name="C5" type="radio" value="TSUEN WAN"/>
+                                    {{ _('TSUEN WAN') }}<p/>
+                                    <input name="C6" type="radio" value="MY CINEMA YOHO MALL"/>
+                                    MY CINEMA YOHO MALL<p/></td>
+                            </tr>
+
+                            <tr>
+                                <td class="h4">{{ _('Movie:') }}</td>
+                                <td><input type="radio" name="M1" value=""/>m1
+                                    <input type="radio" name="M2" value=""/>m2
+                                    <input type="radio" name="M3" value=""/>m3
+                                    <input type="radio" name="M4" value=""/>m4
+                                    <input type="radio" name="M5" value=""/>m5
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="h4">{{ _('No. of People:') }}</td>
+                                <td><input name="countno" type="text"
+                                           title="{{ _('Enter Your No. of People') }}"
+                                           required="required"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="h4">{{ _('Social Role:') }}</td>
+                                <td><input type="radio" name="role" id={{ _('Elderly') }} value="65.00"/>
+                                    {{ _('Elderly') }}<p/>
+                                    <input type="radio" name="role" id={{ _('Adult') }} value="75.00"/>
+                                    {{ _('Adult') }}<p/>
+                                    <input type="radio" name="role" id={{ _('Student') }} value="55.00"/>
+                                    {{ _('Student') }}<p/></td>
+                            </tr>
+
+                            <tr>
+                                <td class="h4">{{ _('Payment:') }}</td>
+                                <td><input type="radio" name="payment"/>
+                                    visa<p/>
+                                    <input type="radio" name="payment"/>
+                                    mastercard<p/>
+                            </tr>
+
+                            <tr>
+                                <td class="h4">{{ _('Appointment Date:') }}</td>
+                                <td>
+                                    <input type="date" name="adate"
+                                           title="Choose Your Date" required="required"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td align="center">
+                                    <input type="reset" value="Reset"/>&emsp;
+                                    <input type="submit" value="VMSubmit"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

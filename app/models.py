@@ -7,21 +7,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from app import db, login
 
-'''
-c_followers = db.Table(
-    'cw_cfollow', db.Column('c_fol_id', db.Integer, primary_key=True),
-    db.Column('c_foled_id', db.Integer, db.ForeignKey('cw_cinemas.cid'))
-)
-'''
-
-
-'''
-m_followers = db.Table(
-    'cw_mfollow', db.Column('m_fol_id', db.Integer, primary_key=True),
-    db.Column('m_foled_id', db.Integer, db.ForeignKey('cw_movie.cid'))
-)
-'''
-
 
 class User(UserMixin, db.Model):
     __tablename__ = 'cw_user'
@@ -92,6 +77,9 @@ class Ticket(db.Model):
     p_price = db.Column(db.Integer)
     t_payment = db.Column(db.String, nullable=False)
     generate_time = db.Column(db.DateTime,  default=datetime.utcnow, nullable=True)
+    cid = db.Column(db.Integer, db.ForeignKey('cw_cinemas.cid'))
+    mid = db.Column(db.Integer, db.ForeignKey('cw_movie.mid'))
+    pid = db.Column(db.Integer, db.ForeignKey('cw_price.pid'))
 
 
 class Cinemas(db.Model):
@@ -124,12 +112,10 @@ class Movie(db.Model):
     m_num = db.Column(db.Integer, nullable=False)
     m_name = db.Column(db.String(100), unique=True)
     m_unreleased = db.Column(db.Boolean, default=False, nullable=False)
-    m_latest = db.Column(db.Boolean, default=False, nullable=False)
     m_type = db.Column(db.String(50))
     m_category = db.Column(db.String(3), nullable=False)
-    m_rate = db.Column(db.Numeric(2, 2))
+    m_language = db.Column(db.String)
     m_releasedate = db.Column(db.DateTime)
-    tid = db.Column(db.Integer, db.ForeignKey('cw_ticket'))
 
     def __repr__(self):
         return '<Movie {}>'.format(self.m_name)
@@ -149,4 +135,12 @@ class Price(db.Model):
     p_person = db.Column(db.Integer)
     p_time = db.Column(db.DateTime)
     p_price = db.Column(db.Integer)
-    tid = db.Column(db.Integer, db.ForeignKey('cw_ticket'))
+
+
+class Contact(db.Model):
+    __tablename__ = 'cw_contact'
+    conid = db.Column(db.Integer, primary_key=True)
+    contype = db.Column(db.String(10))
+    conway = db.Column(db.String(20))
+    phoneno = db.Column(db.Integer)
+    hyperlink = db.Column(db.String)

@@ -86,7 +86,7 @@ def ticket():
 def price():
     form = TicketForm(current_user.username)
     if form.validate_on_submit():
-        prices = Price(p_role=form.u_person.data, p_person=form.p_person.data, t_date=form.t_date.data,
+        prices = Price(p_role=form.u_person.data, p_person=form.p_person.data, p_date=form.t_date.data,
                        p_price=form.p_price.data)
         db.session.add(prices)
         db.session.commit()
@@ -104,3 +104,8 @@ def movie_category():
 @bp.route('/cinemas', methods=['GET', 'POST'])
 def cinemas():
     return render_template('cinemas.html', title=_('Cinemas'))
+
+
+@bp.route('/movie', methods=['GET', 'POST'])
+def movie():
+    return render_template('movie.html', title=_('Movie'))
