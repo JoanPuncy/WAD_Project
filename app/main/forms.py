@@ -58,7 +58,7 @@ class TicketForm(FlaskForm):
     p_role = RadioField(_l('Social Role'), choices=[('Elderly', _l('Elderly')), ('Adult', _l('Adult')),
                                                     ('Student', _l('Student'))])
     t_date = DateTimeField(_l('Date and Time'), format=[format('LLL')], validators=[DataRequired()])
-    t_payment = RadioField(_l('Payment'), choices=[('visa', _l('visa')), ('mastercard', _l('mastercard'))])
+    t_payment = RadioField(_l('Payment'), choices=[('visa', _l('VISA')), ('mastercard', _l('MasterCard'))])
     p_price = IntegerField(_l('Price'), render_kw={'readonly': True})
     submit = SubmitField(_l('Submit'))
 
