@@ -2,26 +2,94 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block current_app_content %}
-    <h1>{{ _('Hi, %(username)s!', username=current_user.username) }}</h1>
-    {% if form %}
-        {{ wtf.quick_form(form) }}
-        <br>
-    {% endif %}
-    {% for post in posts %}
-        {% include '_post.html' %}
-    {% endfor %}
-    <nav aria-label="...">
-        <ul class="pager">
-            <li class="previous{% if not prev_url %} disabled{% endif %}">
-                <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> {{ _('Newer posts') }}
-                </a>
-            </li>
-            <li class="next{% if not next_url %} disabled{% endif %}">
-                <a href="{{ next_url or '#' }}">
-                    {{ _('Older posts') }} <span aria-hidden="true">&rarr;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <img src="https://www.cinema.com.hk/images/icon_broadwayLogo_wap_v3.png" alt="Broadway Circuit Logo"
+         class="center-block">
+    <h1 class="text-center text-primary">{{ _('Welcome to visit our website!') }}</h1>
+    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_17_1446798317.jpg"
+         alt="cinema babackground" class="center-block">
+    <div class="card" id="AU">
+        <div class="bg-danger text-center text-warning"><h2>{{ _('About Us') }}</h2></div>
+        <h4 class="text-center text-danger">{{ _('(Non-Official Website)') }}</h4>
+        <p>{{ _('Since the beginning of the 20th century,
+        “Broadway” is known for its reputation as the birthplace for many famous art and entertainment
+        performances such as musicals, dramas, operas and dancing, bringing the audience to a series of fabulous
+        in stage entertainments. As of today, many of the performances are considered to be classics, deeply touched
+        the hearts of audiences and continued to sparkle on the stage. Broadway Circuit named “Broadway” also shares
+        the same visions. We firmly believe that movies can take people to experience the complexity of life and
+        the real world in a greater sense of meaning, inspire people to think & act positively and have the courage
+        to make dreams and pursue them in their arena of life.') }}</p>
+    </div>
+
+    <div class="card" id="CU">
+        <div class="bg-danger text-center text-warning"><h2>{{ _('Contact Us') }}</h2></div>
+        <table class="table table-hover text-center h4">
+            <tr>
+                <td class="text-muted">{{ _('Media') }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <a href="https://www.instagram.com/broadway_circuit/" class="text-muted" target="_blank">
+                        Instagram
+                    </a></td>
+                <td></td>
+            <tr>
+                <td></td>
+                <td>
+                    <a href="https://www.youtube.com/user/BwayPalaceAmc" class="text-muted" target="_blank">
+                        YouTube Channel
+                    </a></td>
+                <td></td>
+            <tr>
+                <td></td>
+                <td>
+                    <a href="https://www.facebook.com/broadwaycircuit" class="text-muted" target="_blank">
+                        Facebook Page
+                    </a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://play.google.com/store/apps/details?id=gd.com.client.broadway&hl=zh_HK"
+                       class="text-muted" target="_blank">
+                    Google Play
+                </a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://apps.apple.com/hk/app/ticketing-broadway-palace-amc/id403690922"
+                       class="text-muted" target="_blank">
+                    App Store
+                </a></td>
+                <td></td>
+            </tr>
+            <tr class="bg-info">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{ _('Hotline') }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center">{{ _('Enquiry') }}</td>
+                <td class="text-left"><h5>23880002</h5></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center">{{ _('User') }}</td>
+                <td class="text-left"><h5>27837004</h5></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right" valign="bottom">
+                    <a href="#Top" class="href-hover">^Top</a></td>
+            </tr>
+        </table>
+    </div>
 {% endblock %}

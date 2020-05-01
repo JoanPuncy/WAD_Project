@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block current_app_content %}
+    <nav class="navbar navbar-default alert-info">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-cinemas" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#Movie">{{ _('Movie') }}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-cinemas">
+                <ul class="nav navbar-nav">
+                    <li><a href="#Re">{{ _('Releasing') }}</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#UNRe">{{ _('Unreleased') }}</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#MC">{{ _('Movie Category') }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="MovieInfo" class="card">
+        <div class="bg-warning text-center text-primary"><a name="Movie"></a>
+            <h2>{{ _('Movie List') }}</h2></div>
+        <table class="table-hover h4 text-center" width="100%">
+            <tr class="text-left text-muted">
+                <td><a name="Re">{{ _('Releasing') }}</a></td>
+            </tr>
+            <tr class="h3">
+                <td colspan="2" class="bg-success">
+                    {{ _('[3] The Lehman Trilogy(NT Live 2019-20)') }}
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle">
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/movie/movie_1584522716.jpg"/>
+                </td>
+                <td class="text-left">
+                    <p class="text-warning">{{ _('Information:') }}<p/>
+                    <p>{{ _('Movie Category:&emsp;') }}
+                        <img src="https://vignette.wikia.nocookie.net/rating-system/images/7/7c/HK2a.svg/revision/latest/scale-to-width-down/25?cb=20161013200656"
+                             alt="IIA Logo"></p>
+                    <p>&emsp;&emsp;{{ _('Movie Type:&emsp;Drama') }}</p>
+                    <p>&emsp;&emsp;{{ _('Release On:&emsp;29-02-2020') }}</p>
+                    <p>&nbsp;&emsp;&emsp;&emsp;{{ _('Duration:&emsp;232 mins') }}</p>
+                    <p>&emsp;&emsp;&emsp;{{ _('Language:&emsp;English(Chinese Subtitle)') }}</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right" valign="bottom" colspan="2">
+                    <a href="#Top" class="href-hover">^Top</a></td>
+            </tr>
+
+            <tr class="text-left text-muted">
+                <td><a name="UNRe">{{ _('Unreleased') }}</a></td>
+            </tr>
+            <tr class="h3">
+                <td colspan="2" class="bg-danger">
+                    {{ _('[1] My Hero Academia: Heroes Rising') }}
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle">
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/movie/movie_1585039051.jpg"/>
+                </td>
+                <td class="text-left">
+                    <p class="text-warning">{{ _('Information:') }}<p/>
+                    <p>{{ _('Movie Category:&emsp;') }}
+                        <img src="https://vignette.wikia.nocookie.net/rating-system/images/7/7c/HK2a.svg/revision/latest/scale-to-width-down/25?cb=20161013200656"
+                             alt="IIA Logo"></p>
+                    <p>&emsp;&emsp;{{ _('Movie Type:&emsp;Animation') }}</p>
+                    <p>&emsp;&emsp;{{ _('Release On:&emsp;21-05-2020') }}</p>
+                    <p>&nbsp;&emsp;&emsp;&emsp;{{ _('Duration:&emsp;103 mins') }}</p>
+                    <p>&emsp;&emsp;&emsp;{{ _('Language:&emsp;Japanese(Chinese, English Subtitles)') }}</p>
+                </td>
+            </tr>
+
+            <tr class="h3">
+                <td colspan="2" class="bg-danger">
+                    {{ _('[2] Wet Season') }}
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle">
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/movie/movie_1584677421.jpg"/>
+                </td>
+                <td class="text-left">
+                    <p class="text-warning">{{ _('Information:') }}<p/>
+                    <p>{{ _('Movie Category:&emsp;') }}
+                        <img src="https://vignette.wikia.nocookie.net/rating-system/images/8/85/HK3.svg/revision/latest/scale-to-width-down/25?cb=20161013200801"
+                             alt="III Logo"></p>
+                    <p>&emsp;&emsp;{{ _('Movie Type:&emsp;Drama') }}</p>
+                    <p>&emsp;&emsp;{{ _('Release On:&emsp;28-05-2020') }}</p>
+                    <p>&nbsp;&emsp;&emsp;&emsp;{{ _('Duration:&emsp;103 mins') }}</p>
+                    <p>&emsp;&emsp;&emsp;{{ _('Language:&emsp;Mandarin, English') }}</p>
+                </td>
+            </tr>
+
+            <tr class="h3">
+                <td colspan="2" class="bg-danger">
+                    {{ _('[4] The Peanut Butter Falcon') }}
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle">
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/movie/movie_1584328219.jpg"/>
+                </td>
+                <td class="text-left">
+                    <p class="text-warning">{{ _('Information:') }}<p/>
+                    <p>{{ _('Movie Category:&emsp;') }}
+                        <img src="https://vignette.wikia.nocookie.net/rating-system/images/7/7c/HK2a.svg/revision/latest/scale-to-width-down/25?cb=20161013200656"
+                             alt="IIA Logo"></p>
+                    <p>&emsp;&emsp;{{ _('Movie Type:&emsp;Comedy') }}</p>
+                    <p>&emsp;&emsp;{{ _('Release On:&emsp;21-05-2020') }}</p>
+                    <p>&nbsp;&emsp;&emsp;&emsp;{{ _('Duration:&emsp;97 mins') }}</p>
+                    <p>&emsp;&emsp;&emsp;{{ _('Language:&emsp;English(Chinese Subtitles)') }}</p>
+                </td>
+            </tr>
+
+            <tr class="h3">
+                <td colspan="2" class="bg-danger">
+                    {{ _('[5] Sumikkogurashi: Good to be in the corner') }}
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle">
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/movie/movie_1585028138.jpg"/>
+                </td>
+                <td class="text-left">
+                    <p class="text-warning">{{ _('Information:') }}<p/>
+                    <p>{{ _('Movie Category:&emsp;') }}
+                        <img src="https://vignette.wikia.nocookie.net/rating-system/images/c/c8/HK1.svg/revision/latest/scale-to-width-down/25?cb=20161013200546"
+                             alt="I Logo"/></p>
+                    <p>&emsp;&emsp;{{ _('Movie Type:&emsp;Animation') }}</p>
+                    <p>&emsp;&emsp;{{ _('Release On:&emsp;25-06-2020') }}</p>
+                    <p>&nbsp;&emsp;&emsp;&emsp;{{ _('Duration:&emsp;66 mins') }}</p>
+                    <p>&emsp;&emsp;&emsp;{{ _('Language:&emsp;Cantonese(Chinese, English Subtitles)') }}</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right" valign="bottom" colspan="2">
+                    <a href="#Top" class="href-hover">^Top</a></td>
+            </tr>
+        </table>
+        {% include 'movie_category.html' %}
+    </div>
+{% endblock %}

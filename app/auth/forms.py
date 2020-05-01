@@ -1,7 +1,7 @@
 from flask_babel import lazy_gettext as _l, _
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, ValidationError
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField, ValidationError
+from wtforms.validators import DataRequired, Email, EqualTo, email_validator
 
 from app.models import User
 
@@ -14,12 +14,15 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
+    first_name = StringField(_l('First Name'), validators=[DataRequired()])
+    last_name = StringField(_l('Last Name'), validators=[DataRequired()])
     username = StringField(_l('Username'), validators=[DataRequired()])
-    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    u_email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    u_phone = IntegerField(_l('Phone Number (+852)'), validators=[DataRequired()])
+    u_person = StringField(_l('Social Role (Elderly, Adult, Student)'), validators=[DataRequired()])
     password = PasswordField(_l('Password'), validators=[DataRequired()])
-    password2 = PasswordField(
-        _l('Repeat Password'), validators=[DataRequired(),
-                                           EqualTo('password')])
+    password_confirm = PasswordField(
+        _l('Password Confirm'), validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField(_l('Register'))
 
     def validate_username(self, username):

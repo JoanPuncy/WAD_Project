@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block current_app_content %}
+    <nav class="navbar navbar-default alert-info">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-cinemas" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#District">{{ _('District') }}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-cinemas">
+                <ul class="nav navbar-nav">
+                    <li><a href="#HKI">{{ _('Hong Kong Island') }}</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#KLN">{{ _('Kowloon') }}</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#NT">{{ _('New Territories') }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="CinemaInfo" class="card">
+        <div class="bg-warning text-center text-primary"><a name="District"></a>
+            <h2>{{ _('Cinemas List') }}</h2></div>
+        <table class="table-hover h4 text-center ">
+            <tr class="text-left text-muted">
+                <td><a name="HKI">{{ _('Hong Kong Island') }}</a></td>
+            </tr>
+            <tr class="h3">
+                <td>1. MOViE MOViE Pacific Place
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_16_1584002567.jpg"
+                         alt="HKIMMPP Cinemas"></td>
+            </tr>
+            <tr>
+                <td class="text-left bg-info">{{ _('Address:&emsp;Level 1, Pacific Place, 88 Queensway Road, Hong Kong Island') }}
+                    <p>&nbsp;{{ _('Facility:&emsp;581&nbsp;Seats&emsp;') }}
+                        <br>&emsp;&emsp;&emsp;&emsp;&emsp;{{ _('6&nbsp;Houses') }}</p></td>
+            </tr>
+            <tr class="h3">
+                <td>2. MOViE MOViE Cityplaza
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_20_1517310231.jpg"
+                         alt="HKIMMC Cinemas"></td>
+            </tr>
+            <tr>
+                <td class="text-left bg-info">{{ _('Address:&emsp;5/F Cityplaza, 18 Taikoo Shing Road, Hong Kong') }}
+                    <p>&nbsp;{{ _('Facility:&emsp;987&nbsp;Seats&emsp;') }}
+                        <br>&emsp;&emsp;&emsp;&emsp;&emsp;{{ _('7&nbsp;Houses') }}</p></td>
+            </tr>
+            <tr>
+                <td align="right" valign="bottom">
+                    <a href="#Top" class="href-hover">^Top</a></td>
+            </tr>
+            <tr class="text-left text-muted">
+                <td><a name="KLN">{{ _('Kowloon') }}</a></td>
+            </tr>
+            <tr class="h3">
+                <td>{{ _('3. HOLLYWOOD') }}
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_18_1446798272.jpg"
+                         alt="HOLLYWOOD Cinemas"></td>
+            </tr>
+            <tr>
+                <td class="text-left bg-info">{{ _('Address:&emsp;3/F, Plaza Hollywood, 3 Lung Poon Street, Diamond Hill, Kowloon, HK') }}
+                    <p>&nbsp;{{ _('Facility:&emsp;1614&nbsp;Seats&emsp;') }}
+                        <br>{{ _('6&nbsp;Houses') }}</p></td>
+            </tr>
+            <tr class="h3">
+                <td>4. PREMIERE ELEMENTS
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_21_1577183182.jpg"
+                         alt="KLNPE Cinemas"></td>
+            </tr>
+            <tr>
+                <td class="text-left bg-info">{{ _('Address:&emsp;2/F, ELEMENTS, 1 Austin Road West, Kowloon') }}
+                    <p>&nbsp;{{ _('Facility:&emsp;1567&nbsp;Seats&emsp;') }}
+                        <br>&emsp;&emsp;&emsp;&emsp;&emsp;{{ _('12&nbsp;Houses') }}</p></td>
+            </tr>
+            <tr>
+                <td align="right" valign="bottom">
+                    <a href="#Top" class="href-hover">^Top</a></td>
+            </tr>
+            <tr class="text-left text-muted">
+                <td><a name="NT">{{ _('New Territories') }}</a></td>
+            </tr>
+            <tr class="h3">
+                <td>{{ _('5. TSUEN WAN') }}
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_3_1446798506.jpg"
+                         alt="NTTW Cinemas"></td>
+            </tr>
+            <tr>
+                <td class="text-left bg-info">{{ _('Address:&emsp;L1-L3 Tsuen Wan Plaza, 4-30 Tai Pa Street, Tsuen Wan, NT') }}
+                    <p>&nbsp;{{ _('Facility:&emsp;771&nbsp;Seats&emsp;') }}
+                        <br>&emsp;&emsp;&emsp;&emsp;&emsp;{{ _('4&nbsp;Houses') }}</p></td>
+            </tr>
+            <tr class="h3">
+                <td>6. MY CINEMA YOHO MALL
+                    <img src="https://mediafiles.cinema.com.hk/broadway/cmsimg/cinweb/misc/misc_cka_19_1500871550.jpg"
+                         alt="NTMCYM Cinemas"></td>
+            </tr>
+            <tr>
+                <td class="text-left bg-info">{{ _('Address:&emsp;Shop 1021, Level 1, YOHO MALL I, 9 Long Yat Road, Yuen Long') }}
+                    <p>&nbsp;{{ _('Facility:&emsp;1211&nbsp;Seats&emsp;') }}
+                        <br>&emsp;&emsp;&emsp;&emsp;&emsp;{{ _('8&nbsp;Houses') }}</p></td>
+            </tr>
+            <tr>
+                <td align="right" valign="bottom">
+                    <a href="#Top" class="href-hover">^Top</a></td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
