@@ -85,7 +85,7 @@ class Ticket(db.Model):
 class Cinemas(db.Model):
     __tablename__ = 'cw_cinemas'
     cid = db.Column(db.Integer, primary_key=True)
-    c_num = db.Column(db.Integer, nullable=False)
+    c_num = db.Column(db.Integer, nullable=False, unique=True)
     c_name = db.Column(db.String(50), unique=True)
     c_district = db.Column(db.String(50), unique=False)
     c_address = db.Column(db.String(250), unique=True)
@@ -109,9 +109,9 @@ class Facility(db.Model):
 class Movie(db.Model):
     __tablename__ = 'cw_movie'
     mid = db.Column(db.Integer, primary_key=True)
-    m_num = db.Column(db.Integer, nullable=False)
+    m_num = db.Column(db.Integer, nullable=False, unique=True)
     m_name = db.Column(db.String(100), unique=True)
-    m_unreleased = db.Column(db.Boolean, default=False, nullable=False)
+    m_unreleased = db.Column(db.Boolean, default=False)
     m_type = db.Column(db.String(50))
     m_category = db.Column(db.String(3), nullable=False)
     m_language = db.Column(db.String)
